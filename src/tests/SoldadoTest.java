@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
+import model.Caballero;
 import model.Ejercito;
 import model.EjercitoIngles;
 import model.OroInsuficienteError;
@@ -75,5 +76,34 @@ public class SoldadoTest {
 	    assert(lanzarExcepcion);
 	}
 	
-
+	@Test
+	
+	void transformarseDePiqueroArqueroIncrementaPuntosDeFuerzaDe5A10Test() throws OroInsuficienteError {
+		Ejercito ejercitoInglesFalso = new EjercitoIngles();
+		Soldado soldado = new Soldado(new Piquero(), ejercitoInglesFalso);
+		int puntosAnteriores = soldado.obtenerPuntos();
+		assert(puntosAnteriores == 5);
+		soldado.transformarse();
+		int puntosPosteriores = soldado.obtenerPuntos();
+		assert(puntosPosteriores == 10);
+	}
+	
+	void transformarseSiendoCaballeroNoProduceTransformacionTest() throws OroInsuficienteError {
+		Ejercito ejercitoInglesFalso = new EjercitoIngles();
+		Soldado soldado = new Soldado(new Caballero(), ejercitoInglesFalso);
+		int puntosAnteriores = soldado.obtenerPuntos();
+		soldado.transformarse();
+		int puntosPosteriores = soldado.obtenerPuntos();
+		assert(puntosAnteriores == puntosPosteriores);
+	}
+	
+	@Test
+	
+	void transformarseDePiqueroArqueroGasta30() throws OroInsuficienteError {
+		Ejercito ejercitoInglesFalso = new EjercitoIngles();
+		Soldado soldado = new Soldado(new Piquero(), ejercitoInglesFalso);
+		int reservaOroInicial = ejercitoInglesFalso.obtenerReservaOro();
+		soldado.transformarse();
+		assertEquals(30, reservaOroInicial - ejercitoInglesFalso.obtenerReservaOro());
+	}
 }
