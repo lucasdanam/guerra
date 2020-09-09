@@ -31,7 +31,7 @@ public abstract class Ejercito {
 	public int obtenerPoder() {
 		Iterator<Soldado> soldadosIterador = soldados.iterator();
 		int poderTotal = 0;
-		while(soldadosIterador.hasNext()){
+		while (soldadosIterador.hasNext()) {
 		    Soldado soldado = soldadosIterador.next();
 		    poderTotal += soldado.obtenerPoder();
 		}
@@ -41,7 +41,7 @@ public abstract class Ejercito {
 	public void atacar(Ejercito otroEjercito) {
 		if (this.obtenerPoder() > otroEjercito.obtenerPoder()) {
 			this.ganar(otroEjercito);
-		}else if (this.obtenerPoder() == otroEjercito.obtenerPoder()) {
+		} else if (this.obtenerPoder() == otroEjercito.obtenerPoder()) {
 			this.darDeBajaSoldado(this.obtenerSoldadoConMayorPoder());
 			otroEjercito.darDeBajaSoldado(otroEjercito.obtenerSoldadoConMayorPoder());
 		}
@@ -55,6 +55,7 @@ public abstract class Ejercito {
 	public void perder() {
 		Soldado soldadoMayorPoder = this.obtenerSoldadoConMayorPoder();
 		this.darDeBajaSoldado(soldadoMayorPoder);
+		
 		Soldado soldadoSegundoMayorPoder = this.obtenerSoldadoConMayorPoder();
 		this.darDeBajaSoldado(soldadoSegundoMayorPoder);
 	}
@@ -64,7 +65,7 @@ public abstract class Ejercito {
 		Iterator<Soldado> soldadosIterador = soldados.iterator();
 		int mayorPoder = 0;
 		Soldado soldadoConMayorPoder = soldados.get(0);
-		while(soldadosIterador.hasNext()){
+		while (soldadosIterador.hasNext()) {
 		    Soldado soldado = soldadosIterador.next();
 		    if (soldado.obtenerPoder() > mayorPoder) {
 		    	mayorPoder = soldado.obtenerPoder();

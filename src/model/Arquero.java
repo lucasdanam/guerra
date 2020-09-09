@@ -9,7 +9,7 @@ public class Arquero extends EstadoSoldado {
 		this.costoTransformacion = 40;
 	}
 
-	public void transformar(Soldado soldado) throws IncapacidadParaTransformarseError{
+	public void transformar(Soldado soldado) throws IncapacidadParaTransformarseError {
 		soldado.transformar(new Caballero());
 	}
 	

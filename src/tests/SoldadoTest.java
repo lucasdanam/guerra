@@ -16,29 +16,25 @@ import model.Soldado;
 public class SoldadoTest {
 	
 	@Test
-	void entrenarOtorgaPuntosTest() {
+	void entrenarPiqueroDaPoderTotal8Test() {
 		
 		Ejercito ejercitoIngles = new EjercitoIngles();
-		ArrayList<Soldado> soldados = ejercitoIngles.obtenerSoldados();
-	    Soldado soldado = soldados.get(0);
-	    
-	    int puntosIniciales = soldado.obtenerPuntos();
-
+		Soldado soldado = new Soldado(new Piquero(), ejercitoIngles);
+		
 	    try {
 	    	soldado.entrenar();
 	    } catch (OroInsuficienteError e) {
 	    	assert(false);
 	    }
 	    
-	    assertTrue(soldado.obtenerPuntos() > puntosIniciales);
+	    assertTrue(soldado.obtenerPoder() == 8);
 	}
 	
 	@Test
 	void entrenarGastaOroTest() {
-		//Inicialmente hay 1000 monedas de oro
+		
 		Ejercito ejercitoIngles = new EjercitoIngles();
-		ArrayList<Soldado> soldados = ejercitoIngles.obtenerSoldados();
-	    Soldado soldado = soldados.get(0);
+		Soldado soldado = new Soldado(new Piquero(), ejercitoIngles);
 	    
 	    int reservaInicial = ejercitoIngles.obtenerReservaOro();
 
@@ -55,8 +51,7 @@ public class SoldadoTest {
 	void entrenarConReservadeOroVaciaLanzaOroInsuficienteError() {
 		
 		Ejercito ejercitoIngles = new EjercitoIngles();
-		ArrayList<Soldado> soldados = ejercitoIngles.obtenerSoldados();
-	    Soldado soldado = soldados.get(0);
+		Soldado soldado = new Soldado(new Piquero(), ejercitoIngles);
 	    
 	    try {
 	    	ejercitoIngles.gastarOro(ejercitoIngles.obtenerReservaOro()); //reservas quedan en 0
@@ -81,19 +76,19 @@ public class SoldadoTest {
 	void transformarseDePiqueroArqueroIncrementaPuntosDeFuerzaDe5A10Test() throws OroInsuficienteError {
 		Ejercito ejercitoInglesFalso = new EjercitoIngles();
 		Soldado soldado = new Soldado(new Piquero(), ejercitoInglesFalso);
-		int puntosAnteriores = soldado.obtenerPuntos();
+		int puntosAnteriores = soldado.obtenerPoder();
 		assert(puntosAnteriores == 5);
 		soldado.transformarse();
-		int puntosPosteriores = soldado.obtenerPuntos();
+		int puntosPosteriores = soldado.obtenerPoder();
 		assert(puntosPosteriores == 10);
 	}
 	
 	void transformarseSiendoCaballeroNoProduceTransformacionTest() throws OroInsuficienteError {
 		Ejercito ejercitoInglesFalso = new EjercitoIngles();
 		Soldado soldado = new Soldado(new Caballero(), ejercitoInglesFalso);
-		int puntosAnteriores = soldado.obtenerPuntos();
+		int puntosAnteriores = soldado.obtenerPoder();
 		soldado.transformarse();
-		int puntosPosteriores = soldado.obtenerPuntos();
+		int puntosPosteriores = soldado.obtenerPoder();
 		assert(puntosAnteriores == puntosPosteriores);
 	}
 	

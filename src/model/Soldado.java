@@ -25,7 +25,7 @@ public class Soldado {
 		}
 	}
 	
-	public void transformarse() throws OroInsuficienteError{
+	public void transformarse() throws OroInsuficienteError {
 		try {
 			int gastoDeOro = this.estado.obtenerCostoTransformacion();
 			this.ejercitoPropio.gastarOro(gastoDeOro);
