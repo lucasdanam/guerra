@@ -4,17 +4,17 @@ public class EjercitoBizantino extends Ejercito {
 	
 	public EjercitoBizantino() {
 		
-		this.limitePiqueros = 5;
-		this.limiteArqueros = 8;
-		this.limiteCaballeros = 15;
+		this.maximoPiqueros = 5;
+		this.maximoArqueros = 8;
+		this.maximoCaballeros = 15;
 	
-		for (int i=1; i<=this.limitePiqueros; i++) {
+		for (int i=1; i<=this.maximoPiqueros; i++) {
 			this.soldados.add(new Soldado(new Piquero(), this));
 		}
-		for (int j=1; j<=this.limiteArqueros; j++) {
+		for (int j=1; j<=this.maximoArqueros; j++) {
 			this.soldados.add(new Soldado(new Arquero(), this));
 		}
-		for (int k=1; k<=this.limiteCaballeros; k++) {
+		for (int k=1; k<=this.maximoCaballeros; k++) {
 			this.soldados.add(new Soldado(new Caballero(), this));
 		}
 	}

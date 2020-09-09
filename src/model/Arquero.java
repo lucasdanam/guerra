@@ -9,10 +9,6 @@ public class Arquero extends EstadoSoldado {
 		this.costoTransformacion = 40;
 	}
 
-	public void entrenar() {
-		this.puntosDeFuerza += this.puntosGanables;
-	}
-
 	public void transformar(Soldado soldado) throws IncapacidadParaTransformarseError{
 		soldado.transformar(new Caballero());
 	}

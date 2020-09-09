@@ -10,7 +10,7 @@ public class Soldado {
 		this.ejercitoPropio = ejercitoPropio;
 	}
 	
-	public int obtenerPuntos() {
+	public int obtenerPoder() {
 		return this.estado.obtenerPuntos();
 	}
 	
