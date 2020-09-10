@@ -41,7 +41,15 @@ public abstract class Ejercito {
 	public void atacar(Ejercito otroEjercito) {
 		if (this.obtenerPoder() > otroEjercito.obtenerPoder()) {
 			this.ganar(otroEjercito);
-		} else if (this.obtenerPoder() == otroEjercito.obtenerPoder()) {
+		} else if (this.obtenerPoder() < otroEjercito.obtenerPoder()) {
+			otroEjercito.ganar(this);
+		} else {
+			this.empatar(otroEjercito);
+		}
+	}
+
+	public void empatar(Ejercito otroEjercito) {
+		if (!this.soldados.isEmpty() && otroEjercito.obtenerCantidadDeSoldados()!=0) {
 			this.darDeBajaSoldado(this.obtenerSoldadoConMayorPoder());
 			otroEjercito.darDeBajaSoldado(otroEjercito.obtenerSoldadoConMayorPoder());
 		}
@@ -53,18 +61,18 @@ public abstract class Ejercito {
 	}
 
 	public void perder() {
-		Soldado soldadoMayorPoder = this.obtenerSoldadoConMayorPoder();
-		this.darDeBajaSoldado(soldadoMayorPoder);
-		
-		Soldado soldadoSegundoMayorPoder = this.obtenerSoldadoConMayorPoder();
-		this.darDeBajaSoldado(soldadoSegundoMayorPoder);
+		for (int i = 1; i <= 2; i++) {
+			if (!this.soldados.isEmpty()) {
+				Soldado soldadoMayorPoder = this.obtenerSoldadoConMayorPoder();
+				this.darDeBajaSoldado(soldadoMayorPoder);
+			}
+		}
 	}
 
-	//Lanzar excepcion si la lista de soldados esta vacia
-	private Soldado obtenerSoldadoConMayorPoder() {
+	public Soldado obtenerSoldadoConMayorPoder() {
 		Iterator<Soldado> soldadosIterador = soldados.iterator();
 		int mayorPoder = 0;
-		Soldado soldadoConMayorPoder = soldados.get(0);
+		Soldado soldadoConMayorPoder = null;
 		while (soldadosIterador.hasNext()) {
 		    Soldado soldado = soldadosIterador.next();
 		    if (soldado.obtenerPoder() > mayorPoder) {
@@ -77,5 +85,9 @@ public abstract class Ejercito {
 
 	private void darDeBajaSoldado(Soldado soldado) {
 		this.soldados.remove(soldado);		
+	}
+	
+	public int obtenerCantidadDeSoldados() {
+		return this.soldados.size();
 	}
 }

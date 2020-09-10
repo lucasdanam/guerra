@@ -17,6 +17,5 @@ public class PiqueroTest {
 		piquero.ganarPuntos();
 		//puntos ganados 3
 		assertEquals(piquero.obtenerPuntos(), 8);
-	
 	}
 }
