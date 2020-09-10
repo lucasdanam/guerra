@@ -10,10 +10,14 @@ public abstract class Ejercito {
 	protected int maximoPiqueros;
 	protected int maximoArqueros;
 	protected int maximoCaballeros;
+	protected ArrayList<Batalla> historialBatallas;
+	private Batalla batallaActual;
 	
 	public Ejercito() {
 		this.soldados = new ArrayList<Soldado>();
 		this.reservaOro = 1000;
+		this.historialBatallas = new ArrayList<Batalla>();
+		this.batallaActual = null;
 	}
 	
 	public void gastarOro(int gasto) throws OroInsuficienteError {					
@@ -39,13 +43,23 @@ public abstract class Ejercito {
 	}
 	
 	public void atacar(Ejercito otroEjercito) {
+		Batalla batalla = new Batalla(this, otroEjercito);
+		this.entrarEnBatalla(batalla);
+		otroEjercito.entrarEnBatalla(batalla);
+		this.historialBatallas.add(batalla);
 		if (this.obtenerPoder() > otroEjercito.obtenerPoder()) {
 			this.ganar(otroEjercito);
+			batalla.darGanada(this);
 		} else if (this.obtenerPoder() < otroEjercito.obtenerPoder()) {
 			otroEjercito.ganar(this);
+			batalla.darGanada(otroEjercito);
 		} else {
 			this.empatar(otroEjercito);
 		}
+	}
+
+	public void entrarEnBatalla(Batalla batalla) {
+		this.batallaActual = batalla;
 	}
 
 	public void empatar(Ejercito otroEjercito) {
@@ -89,5 +103,9 @@ public abstract class Ejercito {
 	
 	public int obtenerCantidadDeSoldados() {
 		return this.soldados.size();
+	}
+
+	public Batalla obtenerBatalla() {
+		return this.batallaActual;
 	}
 }
